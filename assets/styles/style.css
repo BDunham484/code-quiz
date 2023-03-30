@@ -78,3 +78,7 @@ main {
 #start-screen button:hover {
     cursor: pointer;
 }
+
+.hide {
+    display: none;
+}
