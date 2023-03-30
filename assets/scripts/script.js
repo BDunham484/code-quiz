@@ -11,7 +11,6 @@ let scoreEl = document.getElementById('score');
 let counter = 0;
 let questionIndex = 0;
 let score = 0;
-let clearInterval;
 
 
 const endQuiz = () => {
@@ -25,7 +24,7 @@ const endQuiz = () => {
 }
 
 const startCountdown = () => {
-    counter = 1000;
+    counter = 30;
     let timer = setInterval(() => {
         if (counter > 0) {
             counterEl.textContent = counter;
@@ -33,7 +32,7 @@ const startCountdown = () => {
         } else {
             counterEl.textContent = '--';
             endQuiz();
-            
+
             clearInterval(timer);
         }
     }, 1000);
@@ -42,14 +41,14 @@ const startCountdown = () => {
 const getQuestions = () => {
     console.log('getQuestins has run');
     questionsScreenEl.setAttribute('class', 'questions');
-    
+
     questionTitleEl.textContent = questions[questionIndex].question
 
     multipleChoiceEl.innerHTML = '';
 
-let answers = questions[questionIndex].choices;
+    let answers = questions[questionIndex].choices;
 
-    
+
     for (let i = 0; i < answers.length; i++) {
         let buttonsEl = document.createElement('button');
         let content = answers[i];
@@ -86,14 +85,15 @@ const answerHandler = (event) => {
     if (answer === choiceData) {
         console.log(answer + choiceData)
         answerResponse.textContent = "CORRECT!"
-        score+=5
+        score += 5
     } else {
         console.log('WRONG');
         answerResponse.textContent = "WRONG!"
+        counter-=5;
     }
 
-    if (questionIndex === (questions.length -1)) {
-        endQuiz();
+    if (questionIndex === (questions.length - 1)) {
+        counter = 0;
     } else {
         questionIndex++;
         getQuestions();

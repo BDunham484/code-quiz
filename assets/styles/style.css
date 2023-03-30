@@ -19,6 +19,8 @@ header {
     height: 10vh;
     color: antiquewhite;
     font-size: 22px;
+    background-color: #383737;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.08), 0 2px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
 #view-high-scores {
