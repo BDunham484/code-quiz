@@ -103,22 +103,23 @@ const answerHandler = (event) => {
 
 const handleInit = (event) => {
     event.preventDefault();
-    
+    console.log('score: ' + score);
     let highscore = localStorage.getItem('high-score')
-
-    let initials = initialInputEl.value + " - "
-
-    let entry = initials + score
+    console.log(highscore);
+    let parsedScore = JSON.parse(highscore);
+    console.log(parsedScore);
+    let initials = initialInputEl.value
 
     if (highscore === null) {
         highscore = score;
-        localStorage.setItem('high-score', JSON.stringify(entry));
+        localStorage.setItem('high-score', JSON.stringify(score));
+        localStorage.setItem('initials', JSON.stringify(initials));
     }
 
-    if (highscore === 0) {
-        localStorage.setItem('high-score', JSON.stringify(entry));
-    } else if (score > highscore) {
-        localStorage.setItem('high-score', JSON.stringify(entry));
+    if (score > parsedScore) {
+        console.log(score + ' > ' + parsedScore)
+        localStorage.setItem('high-score', JSON.stringify(score));
+        localStorage.setItem('initials', JSON.stringify(initials));
     }
 
     score = 0;
