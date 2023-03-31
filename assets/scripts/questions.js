@@ -15,7 +15,7 @@ const questions = [
         answer: 'yup'
     },
     {
-        question: 'What happens when you blank the thigamabob?',
+        question: 'What happens when you blank the thingamabob?',
         choices: ['nope', 'yup', 'nada', 'wrong'],
         answer: 'yup'
     },

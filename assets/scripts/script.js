@@ -7,6 +7,8 @@ let multipleChoiceEl = document.getElementById('multiple-choice');
 let responseEl = document.getElementById('response');
 let allDoneEl = document.getElementById('all-done');
 let scoreEl = document.getElementById('score');
+let submitInitEl = document.getElementById('submit-initials');
+let initialInputEl = document.getElementById('initial-input');
 
 let counter = 0;
 let questionIndex = 0;
@@ -20,7 +22,6 @@ const endQuiz = () => {
     questionsScreenEl.setAttribute('class', 'hide');
 
     questionIndex = 0;
-    score = 0;
 }
 
 const startCountdown = () => {
@@ -39,7 +40,7 @@ const startCountdown = () => {
 }
 
 const getQuestions = () => {
-    console.log('getQuestins has run');
+    console.log('getQuestions has run');
     questionsScreenEl.setAttribute('class', 'questions');
 
     questionTitleEl.textContent = questions[questionIndex].question
@@ -89,7 +90,7 @@ const answerHandler = (event) => {
     } else {
         console.log('WRONG');
         answerResponse.textContent = "WRONG!"
-        counter-=5;
+        counter -= 5;
     }
 
     if (questionIndex === (questions.length - 1)) {
@@ -100,5 +101,32 @@ const answerHandler = (event) => {
     }
 }
 
+const handleInit = (event) => {
+    event.preventDefault();
+    
+    let highscore = localStorage.getItem('high-score')
+
+    let initials = initialInputEl.value + " - "
+
+    let entry = initials + score
+
+    if (highscore === null) {
+        highscore = score;
+        localStorage.setItem('high-score', JSON.stringify(entry));
+    }
+
+    if (highscore === 0) {
+        localStorage.setItem('high-score', JSON.stringify(entry));
+    } else if (score > highscore) {
+        localStorage.setItem('high-score', JSON.stringify(entry));
+    }
+
+    score = 0;
+
+    allDoneEl.setAttribute('class', 'hide');
+    startScreenEl.setAttribute('class', 'start');
+}
+
 startButtonEl.addEventListener('click', startHandler);
 multipleChoiceEl.addEventListener('click', answerHandler);
+submitInitEl.addEventListener('click', handleInit);
